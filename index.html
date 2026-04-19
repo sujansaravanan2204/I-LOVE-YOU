@@ -6,110 +6,80 @@
 <title>For Pavithra ❤️</title>
 
 <style>
-
-/* ===== GLOBAL ===== */
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
-}
-
-body {
-    background:black;
-    color:white;
-    overflow:hidden;
-}
-
-/* VIDEO */
-video {
-    position:fixed;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-2;
-}
-
-/* OVERLAY */
-.overlay {
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-    z-index:-1;
-}
-
-/* SECTIONS */
-.section {
-    position:absolute;
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    opacity:0;
-    transition:1s;
-}
-
-.active {
-    opacity:1;
-    z-index:5;
-}
-
-/* GLASS */
-.glass {
-    background: rgba(255,255,255,0.08);
-    border-radius:20px;
-    padding:40px 30px;
-    backdrop-filter: blur(15px);
-    border:1px solid rgba(255,255,255,0.2);
-    text-align:center;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-
-    box-shadow: 0 0 30px rgba(255,77,109,0.2);
-}
-
-/* TEXT */
-.neon {
-    font-size:2.5rem;
-    color:#ff4d6d;
-    text-shadow:0 0 10px #ff4d6d,0 0 30px #ff4d6d;
-}
-
-.type {
-    font-size:1.6rem;
-    line-height:1.6;
-    max-width:80%;
-    text-align:center;
-    opacity:0;
-    transition: opacity 1.5s ease;
-}
-
-/* BUTTON */
-button {
-    margin-top:20px;
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    background:#ff4d6d;
-    color:white;
-    cursor:pointer;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
+body{background:black;color:white;overflow:hidden;}
 
 /* PARTICLES */
-canvas {
+canvas{
     position:fixed;
     top:0;
     left:0;
     z-index:-1;
 }
 
+/* VIDEO */
+video{
+    position:fixed;width:100%;height:100%;
+    object-fit:cover;z-index:-2;
+}
+
+/* OVERLAY */
+.overlay{
+    position:fixed;width:100%;height:100%;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    z-index:-1;
+}
+
+/* SECTIONS */
+.section{
+    position:absolute;width:100%;height:100vh;
+    display:flex;justify-content:center;align-items:center;
+    flex-direction:column;opacity:0;transition:1s;
+}
+.active{opacity:1;z-index:5;}
+
+/* GLASS */
+.glass{
+    background: rgba(255,255,255,0.08);
+    border-radius:20px;padding:30px;
+    backdrop-filter: blur(15px);
+    text-align:center;
+}
+
+/* TEXT */
+.neon{
+    font-size:2.3rem;color:#ff4d6d;
+}
+
+.type{font-size:1.4rem;max-width:80%;}
+
+/* BUTTON */
+button{
+    margin-top:15px;padding:10px 20px;
+    border:none;border-radius:20px;
+    background:#ff4d6d;color:white;cursor:pointer;
+}
+
+/* INPUT */
+input{
+    padding:10px;border-radius:10px;border:none;
+    margin-top:10px;text-align:center;
+}
+
+/* MEMORY */
+.memory img{
+    width:200px;border-radius:10px;margin:10px;
+}
+
+/* HEART */
+.heart{
+    position:absolute;
+    animation:fade 1s forwards;
+}
+@keyframes fade{
+    to{opacity:0; transform:translateY(-20px);}
+}
 </style>
 </head>
 
@@ -118,47 +88,69 @@ canvas {
 <audio id="music" src="music.mp3" loop></audio>
 
 <video autoplay muted loop>
-    <source src="intro.mp4" type="video/mp4">
+    <source src="intro.mp4">
 </video>
 
-<div class="overlay"></div>
 <canvas id="particles"></canvas>
+<div class="overlay"></div>
 
 <!-- HOME -->
 <div class="section active">
     <div class="glass">
-        <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
+        <h1 class="neon">Pavithra ❤️</h1>
         <p>Kuttima… my Vidhuma</p>
-        <button onclick="startStory()">Start</button>
+        <button onclick="start()">Start</button>
     </div>
 </div>
 
-<!-- SCENE 1 -->
+<!-- STORY -->
 <div class="section">
     <div class="glass">
-        <div class="type" id="text1"></div>
-    </div>
-</div>
-
-<!-- SCENE 2 -->
-<div class="section">
-    <div class="glass">
-        <div class="type" id="text2"></div>
+        <div id="story" class="type"></div>
     </div>
 </div>
 
 <!-- CHOICE -->
 <div class="section">
     <div class="glass">
-        <button onclick="pathLove()">What I felt</button>
-        <button onclick="pathFuture()">Something I never told you</button>
+        <button onclick="path1()">What I felt</button>
+        <button onclick="path2()">Something I never told you</button>
+        <p style="margin-top:15px;font-size:0.9rem;">
+        (Some things are hidden… explore)
+        </p>
     </div>
 </div>
 
 <!-- RESULT -->
 <div class="section">
     <div class="glass">
-        <div class="type" id="resultText"></div>
+        <div id="result" class="type"></div>
+        <p style="margin-top:10px;font-size:0.8rem;">
+        Maybe numbers matter too…
+        </p>
+    </div>
+</div>
+
+<!-- PUZZLE -->
+<div class="section">
+    <div class="glass">
+        <p>Enter what matters</p>
+        <input id="code" placeholder="????">
+        <button onclick="unlock()">Unlock</button>
+    </div>
+</div>
+
+<!-- MEMORY -->
+<div class="section">
+    <div class="glass memory">
+        <p class="type">You remembered… ❤️</p>
+        <img src="memory1.jpg">
+        <p>That day… I was nervous</p>
+
+        <img src="memory2.jpg">
+        <p>This is when you became important</p>
+
+        <button onclick="final()">Continue</button>
     </div>
 </div>
 
@@ -171,92 +163,103 @@ canvas {
 
 <script>
 
-/* SECTIONS */
-const sections = document.querySelectorAll(".section");
-
+/* SECTION CONTROL */
+let sections = document.querySelectorAll(".section");
 function show(i){
     sections.forEach(s=>s.classList.remove("active"));
     sections[i].classList.add("active");
 }
 
-/* CINEMATIC TEXT */
-function cinematicText(id, lines, delay=2500){
-    let el = document.getElementById(id);
-    let i = 0;
-
-    function next(){
-        if(i >= lines.length) return;
-
-        el.style.opacity = 0;
-
-        setTimeout(()=>{
-            el.innerHTML = lines[i];
-            el.style.opacity = 1;
-            i++;
-            setTimeout(next, delay);
-        }, 800);
-    }
-
-    next();
+/* TYPE EFFECT */
+function type(id,text){
+    let i=0;
+    let el=document.getElementById(id);
+    el.innerHTML="";
+    let inter=setInterval(()=>{
+        el.innerHTML+=text[i];
+        i++;
+        if(i>=text.length) clearInterval(inter);
+    },40);
 }
 
-/* STORY */
-function startStory(){
+/* START */
+function start(){
     document.getElementById("music").play().catch(()=>{});
     show(1);
+    type("story","We met on Hinge…\nAnd slowly… you became important to me.");
 
-    cinematicText("text1",[
-        "We met on Hinge…",
-        "We talked for a month…",
-        "And then… Feb 25 happened."
-    ]);
-
-    setTimeout(()=>{
-        show(2);
-        cinematicText("text2",[
-            "That day… something changed.",
-            "You became my kuttima ❤️"
-        ]);
-    },7000);
-
-    setTimeout(()=>show(3),14000);
+    setTimeout(()=>show(2),5000);
 }
 
 /* PATHS */
-function pathLove(){
-    show(4);
-    cinematicText("resultText",[
-        "That day… 25 felt different.",
-        "That’s when I started falling for you."
-    ]);
-    setTimeout(()=>show(5),7000);
+function path1(){
+    show(3);
+    type("result","That day… 25 felt different.");
+    setTimeout(()=>show(4),4000);
 }
 
-function pathFuture(){
-    show(4);
-    cinematicText("resultText",[
-        "February was not just another month.",
-        "It was the start of us."
-    ]);
-    setTimeout(()=>show(5),7000);
+function path2(){
+    show(3);
+    type("result","February was not just another month.");
+    setTimeout(()=>show(4),4000);
 }
 
-/* PARTICLES */
+/* HIDDEN CLUE */
+document.body.addEventListener("click",(e)=>{
+    if(e.clientX < 100 && e.clientY < 100){
+        alert("You became my kuttima ❤️");
+    }
+});
+
+/* UNLOCK */
+function unlock(){
+    let val=document.getElementById("code").value.toLowerCase();
+
+    if(val==="2502kuttima"){
+        show(5);
+    }else{
+        alert("Not quite… look deeper ❤️");
+    }
+}
+
+function final(){
+    show(6);
+}
+
+/* HEART EFFECT */
+document.onclick = (e)=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=e.pageX+"px";
+    heart.style.top=e.pageY+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+};
+
+/* ===== PERFECT BACKGROUND PARTICLES ===== */
+
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
-let particles=[];
+let particles = [];
+let count = 220;
 
-for(let i=0;i<100;i++){
+for(let i=0;i<count;i++){
     particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2+1,
-        dx:Math.random()-0.5,
-        dy:Math.random()-0.5
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.5 + 0.3,
+        dx: (Math.random()-0.5)*0.2,
+        dy: (Math.random()-0.5)*0.2,
+        opacity: Math.random()
     });
 }
 
@@ -266,14 +269,20 @@ function animate(){
     particles.forEach(p=>{
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(255,77,109,0.7)";
+
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = "#ff4d6d";
+
+        ctx.fillStyle = `rgba(255,77,109,${p.opacity})`;
         ctx.fill();
 
-        p.x+=p.dx;
-        p.y+=p.dy;
+        p.x += p.dx;
+        p.y += p.dy;
 
-        if(p.x<0||p.x>canvas.width) p.dx*=-1;
-        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+        if(p.x < 0) p.x = canvas.width;
+        if(p.x > canvas.width) p.x = 0;
+        if(p.y < 0) p.y = canvas.height;
+        if(p.y > canvas.height) p.y = 0;
     });
 
     requestAnimationFrame(animate);
