@@ -9,6 +9,15 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
 body{background:black;color:white;overflow:hidden;}
 
+/* VIDEO */
+video{
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
 /* PARTICLES */
 canvas{
     position:fixed;
@@ -17,59 +26,83 @@ canvas{
     z-index:-1;
 }
 
-/* VIDEO */
-video{
-    position:fixed;width:100%;height:100%;
-    object-fit:cover;z-index:-2;
-}
-
 /* OVERLAY */
 .overlay{
-    position:fixed;width:100%;height:100%;
+    position:fixed;
+    width:100%;
+    height:100%;
     background:rgba(0,0,0,0.6);
     backdrop-filter: blur(6px);
-    z-index:-1;
 }
 
 /* SECTIONS */
 .section{
-    position:absolute;width:100%;height:100vh;
-    display:flex;justify-content:center;align-items:center;
-    flex-direction:column;opacity:0;transition:1s;
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    opacity:0;
+    transform:scale(0.95);
+    transition:1s;
 }
-.active{opacity:1;z-index:5;}
+.active{
+    opacity:1;
+    transform:scale(1);
+    z-index:5;
+}
 
 /* GLASS */
 .glass{
     background: rgba(255,255,255,0.08);
-    border-radius:20px;padding:30px;
+    border-radius:20px;
+    padding:30px;
     backdrop-filter: blur(15px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
     text-align:center;
+    box-shadow: 0 0 30px rgba(255,77,109,0.2);
 }
 
 /* TEXT */
 .neon{
-    font-size:2.3rem;color:#ff4d6d;
+    font-size:2.3rem;
+    color:#ff4d6d;
+    text-shadow:0 0 10px #ff4d6d;
 }
 
-.type{font-size:1.4rem;max-width:80%;}
+.fadeText{
+    font-size:1.5rem;
+    opacity:0;
+    transition:opacity 1.5s ease;
+    max-width:80%;
+}
+.showText{opacity:1;}
 
-/* BUTTON */
 button{
-    margin-top:15px;padding:10px 20px;
-    border:none;border-radius:20px;
-    background:#ff4d6d;color:white;cursor:pointer;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
 }
 
-/* INPUT */
 input{
-    padding:10px;border-radius:10px;border:none;
-    margin-top:10px;text-align:center;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    text-align:center;
 }
 
 /* MEMORY */
 .memory img{
-    width:200px;border-radius:10px;margin:10px;
+    width:200px;
+    border-radius:10px;
 }
 
 /* HEART */
@@ -88,7 +121,7 @@ input{
 <audio id="music" src="music.mp3" loop></audio>
 
 <video autoplay muted loop>
-    <source src="intro.mp4">
+<source src="intro.mp4">
 </video>
 
 <canvas id="particles"></canvas>
@@ -96,111 +129,130 @@ input{
 
 <!-- HOME -->
 <div class="section active">
-    <div class="glass">
-        <h1 class="neon">Pavithra ❤️</h1>
-        <p>Kuttima… my Vidhuma</p>
-        <button onclick="start()">Start</button>
-    </div>
+<div class="glass">
+<h1 class="neon">Pavithra ❤️</h1>
+<p>Kuttima… my Vidhuma</p>
+<button onclick="start()">Start</button>
+</div>
 </div>
 
 <!-- STORY -->
 <div class="section">
-    <div class="glass">
-        <div id="story" class="type"></div>
-    </div>
+<div class="glass">
+<div id="story" class="fadeText"></div>
+</div>
 </div>
 
 <!-- CHOICE -->
 <div class="section">
-    <div class="glass">
-        <button onclick="path1()">What I felt</button>
-        <button onclick="path2()">Something I never told you</button>
-        <p style="margin-top:15px;font-size:0.9rem;">
-        (Some things are hidden… explore)
-        </p>
-    </div>
+<div class="glass">
+<button onclick="path1()">What I felt</button>
+<button onclick="path2()">Something I never told you</button>
+<p style="font-size:0.8rem;">(Some things are hidden… explore)</p>
+</div>
 </div>
 
 <!-- RESULT -->
 <div class="section">
-    <div class="glass">
-        <div id="result" class="type"></div>
-        <p style="margin-top:10px;font-size:0.8rem;">
-        Maybe numbers matter too…
-        </p>
-    </div>
+<div class="glass">
+<div id="result" class="fadeText"></div>
+<p style="font-size:0.8rem;">Maybe numbers matter too…</p>
+</div>
 </div>
 
 <!-- PUZZLE -->
 <div class="section">
-    <div class="glass">
-        <p>Enter what matters</p>
-        <input id="code" placeholder="????">
-        <button onclick="unlock()">Unlock</button>
-    </div>
+<div class="glass">
+<p>Enter what matters</p>
+<input id="code" placeholder="????">
+<button onclick="unlock()">Unlock</button>
+
+<p style="font-size:0.8rem;">
+Think about our first day… and what I call you ❤️
+</p>
+</div>
 </div>
 
 <!-- MEMORY -->
 <div class="section">
-    <div class="glass memory">
-        <p class="type">You remembered… ❤️</p>
-        <img src="memory1.jpg">
-        <p>That day… I was nervous</p>
+<div class="glass memory">
+<p class="fadeText showText">You remembered… ❤️</p>
 
-        <img src="memory2.jpg">
-        <p>This is when you became important</p>
+<img src="memory1.jpg">
+<p>That day… I was nervous</p>
 
-        <button onclick="final()">Continue</button>
-    </div>
+<img src="memory2.jpg">
+<p>This is when you became important</p>
+
+<button onclick="final()">Continue</button>
+</div>
 </div>
 
 <!-- FINAL -->
 <div class="section">
-    <div class="glass">
-        <h1 class="neon">I Love You ❤️</h1>
-    </div>
+<div class="glass">
+<h1 class="neon">I Love You ❤️</h1>
+</div>
 </div>
 
 <script>
 
-/* SECTION CONTROL */
-let sections = document.querySelectorAll(".section");
+/* SECTIONS */
+let sections=document.querySelectorAll(".section");
 function show(i){
     sections.forEach(s=>s.classList.remove("active"));
     sections[i].classList.add("active");
 }
 
-/* TYPE EFFECT */
-function type(id,text){
-    let i=0;
+/* CINEMATIC TEXT */
+function cinematicText(id, lines, delay=2500){
     let el=document.getElementById(id);
-    el.innerHTML="";
-    let inter=setInterval(()=>{
-        el.innerHTML+=text[i];
-        i++;
-        if(i>=text.length) clearInterval(inter);
-    },40);
+    let i=0;
+
+    function next(){
+        if(i>=lines.length) return;
+
+        el.classList.remove("showText");
+
+        setTimeout(()=>{
+            el.innerHTML=lines[i];
+            el.classList.add("showText");
+            i++;
+            setTimeout(next,delay);
+        },800);
+    }
+    next();
 }
 
 /* START */
 function start(){
     document.getElementById("music").play().catch(()=>{});
     show(1);
-    type("story","We met on Hinge…\nAnd slowly… you became important to me.");
 
-    setTimeout(()=>show(2),5000);
+    cinematicText("story",[
+        "We met on Hinge…",
+        "We talked for a month…",
+        "And then… Feb 25 happened.",
+        "Something changed."
+    ]);
+
+    setTimeout(()=>show(2),9000);
 }
 
 /* PATHS */
 function path1(){
     show(3);
-    type("result","That day… 25 felt different.");
+    cinematicText("result",[
+        "That day… 25 felt different."
+    ]);
     setTimeout(()=>show(4),4000);
 }
 
 function path2(){
     show(3);
-    type("result","February was not just another month.");
+    cinematicText("result",[
+        "February was not just another month."
+    ]);
     setTimeout(()=>show(4),4000);
 }
 
@@ -211,14 +263,25 @@ document.body.addEventListener("click",(e)=>{
     }
 });
 
-/* UNLOCK */
+/* PUZZLE */
+let tries=0;
+
 function unlock(){
     let val=document.getElementById("code").value.toLowerCase();
+    tries++;
 
     if(val==="2502kuttima"){
         show(5);
     }else{
-        alert("Not quite… look deeper ❤️");
+        if(tries==2){
+            alert("Maybe… 25/02 means something ❤️");
+        }
+        else if(tries==3){
+            alert("And maybe… what I call you ❤️");
+        }
+        else{
+            alert("Not quite… look deeper ❤️");
+        }
     }
 }
 
@@ -227,17 +290,17 @@ function final(){
 }
 
 /* HEART EFFECT */
-document.onclick = (e)=>{
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=e.pageX+"px";
-    heart.style.top=e.pageY+"px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),1000);
+document.onclick=(e)=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=e.pageX+"px";
+    h.style.top=e.pageY+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1000);
 };
 
-/* ===== PERFECT BACKGROUND PARTICLES ===== */
+/* ===== PERFECT STAR-LIKE PARTICLES ===== */
 
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
