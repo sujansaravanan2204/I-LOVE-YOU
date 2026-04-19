@@ -87,6 +87,8 @@ video {
     line-height:1.6;
     max-width:80%;
     text-align:center;
+    opacity:0;
+    transition: opacity 1.5s ease;
 }
 
 /* BUTTON */
@@ -177,48 +179,66 @@ function show(i){
     sections[i].classList.add("active");
 }
 
-/* STORY FLOW (UPDATED LOVE CONTENT) */
+/* CINEMATIC TEXT */
+function cinematicText(id, lines, delay=2500){
+    let el = document.getElementById(id);
+    let i = 0;
+
+    function next(){
+        if(i >= lines.length) return;
+
+        el.style.opacity = 0;
+
+        setTimeout(()=>{
+            el.innerHTML = lines[i];
+            el.style.opacity = 1;
+            i++;
+            setTimeout(next, delay);
+        }, 800);
+    }
+
+    next();
+}
+
+/* STORY */
 function startStory(){
     document.getElementById("music").play().catch(()=>{});
     show(1);
 
-    type("text1",
-    "We met on Hinge…\nWe talked for a month…\nAnd then… Feb 25 happened.");
+    cinematicText("text1",[
+        "We met on Hinge…",
+        "We talked for a month…",
+        "And then… Feb 25 happened."
+    ]);
 
     setTimeout(()=>{
         show(2);
-        type("text2",
-        "That day… something changed.\nYou became my kuttima ❤️");
-    },6000);
+        cinematicText("text2",[
+            "That day… something changed.",
+            "You became my kuttima ❤️"
+        ]);
+    },7000);
 
-    setTimeout(()=>show(3),12000);
+    setTimeout(()=>show(3),14000);
 }
 
 /* PATHS */
 function pathLove(){
     show(4);
-    type("resultText",
-    "That day… 25 felt different.\nThat’s when I started falling for you.");
+    cinematicText("resultText",[
+        "That day… 25 felt different.",
+        "That’s when I started falling for you."
+    ]);
     setTimeout(()=>show(5),7000);
 }
 
 function pathFuture(){
     show(4);
-    type("resultText",
-    "February was not just another month.\nIt was the start of us.");
+    cinematicText("resultText",[
+        "February was not just another month.",
+        "It was the start of us."
+    ]);
     setTimeout(()=>show(5),7000);
-}
-
-/* TYPE EFFECT */
-function type(id,text){
-    let i=0;
-    let el=document.getElementById(id);
-    el.innerHTML="";
-    let inter=setInterval(()=>{
-        el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
-        i++;
-        if(i>=text.length) clearInterval(inter);
-    },40);
 }
 
 /* PARTICLES */
