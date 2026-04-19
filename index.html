@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,26 +8,27 @@
 
 <style>
 
-/* ================= GLOBAL ================= */
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
-}
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:black;color:white;overflow:hidden;}
 
-body {
-    background:black;
-    color:white;
-    overflow:hidden;
-}
-
-/* ================= INTRO (MOVIE LOGO) ================= */
-.intro {
+/* ===== START SCREEN (FIX) ===== */
+#startScreen{
     position:fixed;
     width:100%;
     height:100vh;
     background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+}
+
+/* ===== INTRO ===== */
+.intro{
+    position:fixed;
+    width:100%;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -34,112 +36,52 @@ body {
     flex-direction:column;
 }
 
-/* RED GLOW BACKGROUND */
-.light-rays {
+.light-rays{
     position:absolute;
     width:200%;
     height:200%;
     background: radial-gradient(circle, rgba(255,0,0,0.25), transparent 60%);
     filter: blur(80px);
-    animation: pulse 4s infinite;
+    animation:pulse 4s infinite;
 }
+@keyframes pulse{0%{opacity:.2;}50%{opacity:.8;}100%{opacity:.2;}}
 
-@keyframes pulse {
-    0%{opacity:0.2;}
-    50%{opacity:0.8;}
-    100%{opacity:0.2;}
-}
-
-/* LOGO TEXT */
-#logo {
+/* LOGO */
+#logo{
     font-size:10rem;
     font-weight:bold;
     color:#e50914;
-    letter-spacing:5px;
     opacity:0;
     transform:scale(0.2);
-    transition:1.2s cubic-bezier(0.2,1,0.3,1);
-}
-
-/* LOGO ANIMATIONS */
-.show { opacity:1; transform:scale(1.4); }
-.settle { transform:scale(1); }
-.expand { letter-spacing:35px; }
-
-.glow {
-    text-shadow:0 0 20px #ff0000,0 0 80px #ff4d6d;
-}
-
-/* ================= BACKGROUND VIDEO ================= */
-video {
-    position:fixed;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-2;
-}
-
-/* DARK OVERLAY */
-.overlay {
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-    z-index:-1;
-}
-
-/* ================= SECTIONS ================= */
-.section {
-    position:absolute;
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    opacity:0;
     transition:1s;
 }
 
-.active {
-    opacity:1;
-    z-index:5;
-}
+/* ===== MAIN PAGE ===== */
+video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2;}
+.overlay{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:-1;}
 
-/* ================= GLASS BOX (FIXED ALIGNMENT) ================= */
-.glass {
-    background: rgba(255,255,255,0.08);
+.section{
+    position:absolute;width:100%;height:100vh;
+    display:flex;justify-content:center;align-items:center;
+    flex-direction:column;opacity:0;transition:1s;
+}
+.active{opacity:1;z-index:5;}
+
+.glass{
+    background:rgba(255,255,255,0.08);
     border-radius:20px;
-    padding:40px 30px; /* 🔥 better spacing */
-    backdrop-filter: blur(15px);
-    border:1px solid rgba(255,255,255,0.2);
+    padding:40px;
     text-align:center;
-
-    display:flex;               /* 🔥 center fix */
-    justify-content:center;
-    align-items:center;
+    display:flex;
     flex-direction:column;
-
-    box-shadow: 0 0 30px rgba(255,77,109,0.2);
+    align-items:center;
 }
 
-/* ================= TEXT STYLES ================= */
-.neon {
-    font-size:2.5rem;
-    color:#ff4d6d;
-    text-shadow:0 0 10px #ff4d6d,0 0 30px #ff4d6d;
-}
+.neon{font-size:2rem;color:#ff4d6d;}
 
-.type {
-    font-size:1.6rem;
-    line-height:1.6; /* 🔥 spacing fix */
-    max-width:80%;
-    text-align:center;
-}
+.type{font-size:1.6rem;line-height:1.6;}
 
-/* ================= BUTTON ================= */
-button {
+button{
     margin-top:20px;
     padding:12px 25px;
     border:none;
@@ -149,38 +91,37 @@ button {
     cursor:pointer;
 }
 
-/* ================= PARTICLES ================= */
-canvas {
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-}
+canvas{position:fixed;top:0;left:0;z-index:-1;}
 
 </style>
 </head>
 
 <body>
 
-<!-- ================= INTRO SCREEN ================= -->
+<!-- ===== START SCREEN ===== -->
+<div id="startScreen">
+    <button onclick="startExperience()">Tap to Start ❤️</button>
+</div>
+
+<!-- ===== INTRO ===== -->
 <div class="intro" id="introScreen">
     <div class="light-rays"></div>
     <div id="logo">V</div>
 </div>
 
-<!-- ================= AUDIO FILES ================= -->
+<!-- AUDIO -->
 <audio id="boom" src="boom.mp3"></audio>
 <audio id="whoosh" src="whoosh.mp3"></audio>
 <audio id="music" src="music.mp3" loop></audio>
 
-<!-- ================= BACKGROUND ================= -->
+<!-- BACKGROUND -->
 <video autoplay muted loop>
     <source src="intro.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 <canvas id="particles"></canvas>
 
-<!-- ================= HOME ================= -->
+<!-- HOME -->
 <div class="section active" id="home">
     <div class="glass">
         <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
@@ -189,21 +130,10 @@ canvas {
     </div>
 </div>
 
-<!-- ================= SCENE 1 ================= -->
-<div class="section" id="scene1">
-    <div class="glass">
-        <div class="type" id="text1"></div>
-    </div>
-</div>
+<!-- SCENES -->
+<div class="section" id="scene1"><div class="glass"><div id="text1" class="type"></div></div></div>
+<div class="section" id="scene2"><div class="glass"><div id="text2" class="type"></div></div></div>
 
-<!-- ================= SCENE 2 ================= -->
-<div class="section" id="scene2">
-    <div class="glass">
-        <div class="type" id="text2"></div>
-    </div>
-</div>
-
-<!-- ================= CHOICE ================= -->
 <div class="section" id="choice">
     <div class="glass">
         <button onclick="pathLove()">How much do I love you?</button>
@@ -211,53 +141,50 @@ canvas {
     </div>
 </div>
 
-<!-- ================= RESULT ================= -->
 <div class="section" id="result">
-    <div class="glass">
-        <div class="type" id="resultText"></div>
-    </div>
+    <div class="glass"><div id="resultText" class="type"></div></div>
 </div>
 
-<!-- ================= FINAL ================= -->
 <div class="section" id="final">
-    <div class="glass">
-        <h1 class="neon">I Love You ❤️</h1>
-    </div>
+    <div class="glass"><h1>I Love You ❤️</h1></div>
 </div>
 
 <script>
 
-/* ================= INTRO ANIMATION ================= */
-window.onload = function(){
+/* ===== INTRO FIX ===== */
+function startExperience(){
 
-    const logo = document.getElementById("logo");
-    const intro = document.getElementById("introScreen");
+    document.getElementById("startScreen").style.display="none";
+
+    const logo=document.getElementById("logo");
+    const intro=document.getElementById("introScreen");
+
+    document.getElementById("boom").play().catch(()=>{});
 
     setTimeout(()=>{
-        document.getElementById("boom").play().catch(()=>{});
-        logo.classList.add("show","glow");
-    },800);
+        logo.style.opacity="1";
+        logo.style.transform="scale(1.4)";
+    },200);
 
     setTimeout(()=>{
-        logo.classList.add("settle");
-    },2000);
+        logo.style.transform="scale(1)";
+    },1500);
 
     setTimeout(()=>{
         document.getElementById("whoosh").play().catch(()=>{});
         logo.textContent="VIDHUU";
-        logo.classList.add("expand");
-    },3000);
+        logo.style.letterSpacing="35px";
+    },2500);
 
     setTimeout(()=>{
         intro.style.opacity="0";
         intro.style.transition="1s";
         setTimeout(()=> intro.style.display="none",1000);
-    },5500);
+    },4500);
+}
 
-};
-
-/* ================= STORY ================= */
-const sections = document.querySelectorAll(".section");
+/* ===== STORY ===== */
+const sections=document.querySelectorAll(".section");
 
 function show(i){
     sections.forEach(s=>s.classList.remove("active"));
@@ -271,7 +198,7 @@ function startStory(){
 
     setTimeout(()=>{
         show(2);
-        type("text2","Kuttima...<br>you are my everything ❤️"); /* 🔥 better alignment */
+        type("text2","Kuttima...<br>you are my everything ❤️");
     },5000);
 
     setTimeout(()=>show(3),10000);
@@ -289,10 +216,8 @@ function pathFuture(){
     setTimeout(()=>show(5),6000);
 }
 
-/* ================= TYPE EFFECT ================= */
 function type(id,text){
-    let i=0;
-    let el=document.getElementById(id);
+    let i=0,el=document.getElementById(id);
     el.innerHTML="";
     let inter=setInterval(()=>{
         el.innerHTML+=text[i];
@@ -301,11 +226,11 @@ function type(id,text){
     },40);
 }
 
-/* ================= PARTICLES ================= */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+/* ===== PARTICLES ===== */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
 let particles=[];
 for(let i=0;i<100;i++){
@@ -325,12 +250,10 @@ function animate(){
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
         ctx.fillStyle="rgba(255,77,109,0.7)";
         ctx.fill();
-
         p.x+=p.dx;
         p.y+=p.dy;
-
-        if(p.x<0||p.x>canvas.width) p.dx*=-1;
-        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+        if(p.x<0||p.x>canvas.width)p.dx*=-1;
+        if(p.y<0||p.y>canvas.height)p.dy*=-1;
     });
     requestAnimationFrame(animate);
 }
