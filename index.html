@@ -1,0 +1,194 @@
+```html id="finalboss_intro"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIDHUU Studio Intro</title>
+
+<style>
+body {
+    margin:0;
+    background:black;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+}
+
+/* FADE FROM BLACK */
+.fade {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:black;
+    animation: fadeOut 2s forwards;
+}
+@keyframes fadeOut {
+    to { opacity:0; }
+}
+
+/* VOLUMETRIC LIGHT */
+.light-rays {
+    position:absolute;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(255,0,0,0.25), transparent 60%);
+    filter: blur(80px);
+    animation: pulse 4s infinite;
+}
+@keyframes pulse {
+    0% { opacity:0.2; }
+    50% { opacity:0.8; }
+    100% { opacity:0.2; }
+}
+
+/* TEXT */
+#logo {
+    font-size:12rem;
+    font-weight:bold;
+    color:#e50914;
+    letter-spacing:5px;
+    opacity:0;
+    transform:scale(0.2);
+    transition: all 1.2s cubic-bezier(0.2,1,0.3,1);
+    position:relative;
+}
+
+/* GLOW */
+.glow {
+    text-shadow:
+        0 0 20px #ff0000,
+        0 0 60px #ff0000,
+        0 0 120px #ff4d6d;
+}
+
+/* CHROMATIC EFFECT */
+.chromatic::before,
+.chromatic::after {
+    content: attr(data-text);
+    position:absolute;
+    left:0;
+    top:0;
+}
+.chromatic::before {
+    color:red;
+    transform:translate(3px,0);
+    opacity:0.6;
+}
+.chromatic::after {
+    color:blue;
+    transform:translate(-3px,0);
+    opacity:0.6;
+}
+
+/* MOTION BLUR */
+.blur {
+    filter: blur(10px);
+}
+
+/* STATES */
+.show {
+    opacity:1;
+    transform:scale(1.4);
+}
+.settle {
+    transform:scale(1);
+}
+.expand {
+    letter-spacing:40px;
+}
+
+/* LIGHT SWEEP */
+.sweep {
+    position:absolute;
+    width:200%;
+    height:100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.9), transparent);
+    transform: translateX(-100%);
+    animation: sweepAnim 1.2s forwards;
+}
+@keyframes sweepAnim {
+    to { transform: translateX(100%); }
+}
+
+/* SHAKE */
+.shake {
+    animation: shake 0.4s;
+}
+@keyframes shake {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(8px,-8px); }
+    50% { transform: translate(-8px,8px); }
+    75% { transform: translate(5px,-5px); }
+    100% { transform: translate(0,0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fade"></div>
+<div class="light-rays"></div>
+
+<audio id="boom" src="boom.mp3"></audio>
+<audio id="whoosh" src="whoosh.mp3"></audio>
+<audio id="ambient" src="ambient.mp3" loop></audio>
+
+<div id="logo" class="chromatic" data-text="V">V</div>
+
+<script>
+const logo = document.getElementById("logo");
+const boom = document.getElementById("boom");
+const whoosh = document.getElementById("whoosh");
+const ambient = document.getElementById("ambient");
+
+/* START AMBIENT */
+setTimeout(()=> ambient.play(),500);
+
+/* STEP 1: IMPACT */
+setTimeout(()=>{
+    boom.play();
+    logo.classList.add("show","glow","shake","blur");
+},1200);
+
+/* REMOVE BLUR AFTER IMPACT */
+setTimeout(()=>{
+    logo.classList.remove("blur");
+},1800);
+
+/* STEP 2: SETTLE */
+setTimeout(()=>{
+    logo.classList.remove("shake");
+    logo.classList.add("settle");
+},2500);
+
+/* STEP 3: TRANSFORM */
+setTimeout(()=>{
+    whoosh.play();
+    logo.textContent="VIDHUU";
+    logo.setAttribute("data-text","VIDHUU");
+    logo.classList.add("expand");
+
+    let sweep=document.createElement("div");
+    sweep.classList.add("sweep");
+    document.body.appendChild(sweep);
+
+},3500);
+
+/* FINAL GLOW BOOST */
+setTimeout(()=>{
+    logo.style.textShadow="0 0 60px #ff0000,0 0 150px #ff4d6d";
+},5000);
+
+/* TRANSITION TO MAIN PAGE */
+setTimeout(()=>{
+    window.location.href="index.html"; // your love page
+},6500);
+</script>
+
+</body>
+</html>
+```
