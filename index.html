@@ -6,7 +6,14 @@
 <title>For Pavithra ❤️</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+
+/* ================= GLOBAL ================= */
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
 
 body {
     background:black;
@@ -14,8 +21,7 @@ body {
     overflow:hidden;
 }
 
-/* ---------------- INTRO ---------------- */
-
+/* ================= INTRO (MOVIE LOGO) ================= */
 .intro {
     position:fixed;
     width:100%;
@@ -24,10 +30,11 @@ body {
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:9999; /* FIXED */
+    z-index:9999;
     flex-direction:column;
 }
 
+/* RED GLOW BACKGROUND */
 .light-rays {
     position:absolute;
     width:200%;
@@ -36,10 +43,14 @@ body {
     filter: blur(80px);
     animation: pulse 4s infinite;
 }
+
 @keyframes pulse {
-    0%{opacity:0.2;} 50%{opacity:0.8;} 100%{opacity:0.2;}
+    0%{opacity:0.2;}
+    50%{opacity:0.8;}
+    100%{opacity:0.2;}
 }
 
+/* LOGO TEXT */
 #logo {
     font-size:10rem;
     font-weight:bold;
@@ -50,6 +61,7 @@ body {
     transition:1.2s cubic-bezier(0.2,1,0.3,1);
 }
 
+/* LOGO ANIMATIONS */
 .show { opacity:1; transform:scale(1.4); }
 .settle { transform:scale(1); }
 .expand { letter-spacing:35px; }
@@ -58,8 +70,7 @@ body {
     text-shadow:0 0 20px #ff0000,0 0 80px #ff4d6d;
 }
 
-/* ---------------- MAIN PAGE ---------------- */
-
+/* ================= BACKGROUND VIDEO ================= */
 video {
     position:fixed;
     width:100%;
@@ -68,6 +79,7 @@ video {
     z-index:-2;
 }
 
+/* DARK OVERLAY */
 .overlay {
     position:fixed;
     width:100%;
@@ -77,6 +89,7 @@ video {
     z-index:-1;
 }
 
+/* ================= SECTIONS ================= */
 .section {
     position:absolute;
     width:100%;
@@ -88,23 +101,44 @@ video {
     opacity:0;
     transition:1s;
 }
-.active { opacity:1; z-index:5; }
 
+.active {
+    opacity:1;
+    z-index:5;
+}
+
+/* ================= GLASS BOX (FIXED ALIGNMENT) ================= */
 .glass {
     background: rgba(255,255,255,0.08);
     border-radius:20px;
-    padding:30px;
+    padding:40px 30px; /* 🔥 better spacing */
     backdrop-filter: blur(15px);
     border:1px solid rgba(255,255,255,0.2);
     text-align:center;
+
+    display:flex;               /* 🔥 center fix */
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    box-shadow: 0 0 30px rgba(255,77,109,0.2);
 }
 
+/* ================= TEXT STYLES ================= */
 .neon {
     font-size:2.5rem;
     color:#ff4d6d;
     text-shadow:0 0 10px #ff4d6d,0 0 30px #ff4d6d;
 }
 
+.type {
+    font-size:1.6rem;
+    line-height:1.6; /* 🔥 spacing fix */
+    max-width:80%;
+    text-align:center;
+}
+
+/* ================= BUTTON ================= */
 button {
     margin-top:20px;
     padding:12px 25px;
@@ -115,6 +149,7 @@ button {
     cursor:pointer;
 }
 
+/* ================= PARTICLES ================= */
 canvas {
     position:fixed;
     top:0;
@@ -122,33 +157,30 @@ canvas {
     z-index:-1;
 }
 
-.type {
-    font-size:1.5rem;
-    max-width:80%;
-    text-align:center;
-}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
+<!-- ================= INTRO SCREEN ================= -->
 <div class="intro" id="introScreen">
     <div class="light-rays"></div>
     <div id="logo">V</div>
 </div>
 
+<!-- ================= AUDIO FILES ================= -->
 <audio id="boom" src="boom.mp3"></audio>
 <audio id="whoosh" src="whoosh.mp3"></audio>
 <audio id="music" src="music.mp3" loop></audio>
 
-<!-- MAIN CONTENT -->
+<!-- ================= BACKGROUND ================= -->
 <video autoplay muted loop>
     <source src="intro.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 <canvas id="particles"></canvas>
 
+<!-- ================= HOME ================= -->
 <div class="section active" id="home">
     <div class="glass">
         <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
@@ -157,14 +189,21 @@ canvas {
     </div>
 </div>
 
+<!-- ================= SCENE 1 ================= -->
 <div class="section" id="scene1">
-    <div class="glass"><div class="type" id="text1"></div></div>
+    <div class="glass">
+        <div class="type" id="text1"></div>
+    </div>
 </div>
 
+<!-- ================= SCENE 2 ================= -->
 <div class="section" id="scene2">
-    <div class="glass"><div class="type" id="text2"></div></div>
+    <div class="glass">
+        <div class="type" id="text2"></div>
+    </div>
 </div>
 
+<!-- ================= CHOICE ================= -->
 <div class="section" id="choice">
     <div class="glass">
         <button onclick="pathLove()">How much do I love you?</button>
@@ -172,10 +211,14 @@ canvas {
     </div>
 </div>
 
+<!-- ================= RESULT ================= -->
 <div class="section" id="result">
-    <div class="glass"><div class="type" id="resultText"></div></div>
+    <div class="glass">
+        <div class="type" id="resultText"></div>
+    </div>
 </div>
 
+<!-- ================= FINAL ================= -->
 <div class="section" id="final">
     <div class="glass">
         <h1 class="neon">I Love You ❤️</h1>
@@ -183,12 +226,12 @@ canvas {
 </div>
 
 <script>
+
+/* ================= INTRO ANIMATION ================= */
 window.onload = function(){
 
     const logo = document.getElementById("logo");
     const intro = document.getElementById("introScreen");
-
-    /* INTRO TIMELINE */
 
     setTimeout(()=>{
         document.getElementById("boom").play().catch(()=>{});
@@ -205,7 +248,6 @@ window.onload = function(){
         logo.classList.add("expand");
     },3000);
 
-    /* END INTRO */
     setTimeout(()=>{
         intro.style.opacity="0";
         intro.style.transition="1s";
@@ -214,8 +256,7 @@ window.onload = function(){
 
 };
 
-/* ---------------- MAIN STORY ---------------- */
-
+/* ================= STORY ================= */
 const sections = document.querySelectorAll(".section");
 
 function show(i){
@@ -230,7 +271,7 @@ function startStory(){
 
     setTimeout(()=>{
         show(2);
-        type("text2","Kuttima… you are my everything ❤️");
+        type("text2","Kuttima...<br>you are my everything ❤️"); /* 🔥 better alignment */
     },5000);
 
     setTimeout(()=>show(3),10000);
@@ -248,6 +289,7 @@ function pathFuture(){
     setTimeout(()=>show(5),6000);
 }
 
+/* ================= TYPE EFFECT ================= */
 function type(id,text){
     let i=0;
     let el=document.getElementById(id);
@@ -259,7 +301,7 @@ function type(id,text){
     },40);
 }
 
-/* PARTICLES */
+/* ================= PARTICLES ================= */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -293,6 +335,7 @@ function animate(){
     requestAnimationFrame(animate);
 }
 animate();
+
 </script>
 
 </body>
