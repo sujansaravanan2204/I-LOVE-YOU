@@ -149,8 +149,8 @@ canvas {
 <!-- ===== CHOICE ===== -->
 <div class="section" id="choice">
     <div class="glass">
-        <button onclick="pathLove()">What you mean to me</button>
-        <button onclick="pathFuture()">Where I see us</button>
+        <button onclick="pathLove()">How much do I love you?</button>
+        <button onclick="pathFuture()">Our future?</button>
     </div>
 </div>
 
@@ -164,8 +164,7 @@ canvas {
 <!-- ===== FINAL ===== -->
 <div class="section" id="final">
     <div class="glass">
-        <h1 class="neon">I choose you ❤️</h1>
-        <p style="margin-top:10px;">Every time. Every day.</p>
+        <h1 class="neon">I Love You ❤️</h1>
     </div>
 </div>
 
@@ -183,33 +182,25 @@ function startStory(){
     document.getElementById("music").play().catch(()=>{});
     show(1);
 
-    /* 🔹 Scene 1 */
-    type("text1","I didn’t expect anything when I met you...<br>but somehow, you became everything.");
+    type("text1","From the moment I met you… everything changed.");
 
     setTimeout(()=>{
         show(2);
-
-        /* 🔹 Scene 2 */
-        type("text2","Kuttima...<br>you didn’t just enter my life,<br>you changed the way I feel about everything ❤️");
-
+        type("text2","Kuttima...you are my everything ❤️");
     },5000);
 
     setTimeout(()=>show(3),10000);
 }
 
-/* 🔹 Path 1 */
 function pathLove(){
     show(4);
-    type("resultText","It’s not just love...<br>it’s the way you stay in my mind,<br>even in silence.<br><br>You feel like home.");
-
+    type("resultText","I love you in every second of my life.");
     setTimeout(()=>show(5),6000);
 }
 
-/* 🔹 Path 2 */
 function pathFuture(){
     show(4);
-    type("resultText","I don’t just see a future...<br>I see you in it.<br><br>In my best days,<br>and even my worst ones.");
-
+    type("resultText","I see you in every future of mine.");
     setTimeout(()=>show(5),6000);
 }
 
@@ -269,3 +260,4 @@ animate();
 
 </body>
 </html>
+```
