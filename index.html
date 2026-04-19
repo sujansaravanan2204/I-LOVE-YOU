@@ -9,22 +9,40 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
 body{background:black;color:white;overflow:hidden;}
 
+/* VIDEO */
 video{
-    position:fixed;width:100%;height:100%;
-    object-fit:cover;z-index:-2;
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
 }
 
+/* PARTICLES */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* OVERLAY */
 .overlay{
-    position:fixed;width:100%;height:100%;
+    position:fixed;
+    width:100%;
+    height:100%;
     background:rgba(0,0,0,0.6);
     backdrop-filter: blur(6px);
-    z-index:-1;
 }
 
 /* SECTIONS */
 .section{
-    position:absolute;width:100%;height:100vh;
-    display:flex;justify-content:center;align-items:center;
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     flex-direction:column;
     opacity:0;
     transform:scale(0.95);
@@ -36,7 +54,7 @@ video{
     z-index:5;
 }
 
-/* BOX */
+/* GLASS */
 .glass{
     background: rgba(255,255,255,0.08);
     border-radius:20px;
@@ -47,12 +65,14 @@ video{
     align-items:center;
     gap:15px;
     text-align:center;
+    box-shadow: 0 0 30px rgba(255,77,109,0.2);
 }
 
 /* TEXT */
 .neon{
     font-size:2.3rem;
     color:#ff4d6d;
+    text-shadow:0 0 10px #ff4d6d;
 }
 
 .fadeText{
@@ -104,6 +124,7 @@ input{
 <source src="intro.mp4">
 </video>
 
+<canvas id="particles"></canvas>
 <div class="overlay"></div>
 
 <!-- HOME -->
@@ -176,8 +197,8 @@ Think about our first day… and what I call you ❤️
 
 <script>
 
+/* SECTIONS */
 let sections=document.querySelectorAll(".section");
-
 function show(i){
     sections.forEach(s=>s.classList.remove("active"));
     sections[i].classList.add("active");
@@ -278,6 +299,46 @@ document.onclick=(e)=>{
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),1000);
 };
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<100;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2+1,
+        dx:(Math.random()-0.5)*0.5,
+        dy:(Math.random()-0.5)*0.5
+    });
+}
+
+function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,77,109,0.7)";
+        ctx.fill();
+
+        p.x+=p.dx;
+        p.y+=p.dy;
+
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    });
+
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
 
 </script>
 
