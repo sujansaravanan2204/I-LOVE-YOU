@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@ body {
     overflow:hidden;
 }
 
-/* ---------------- INTRO (MOVIE) ---------------- */
+/* ---------------- INTRO ---------------- */
 
 .intro {
     position:fixed;
@@ -24,18 +25,9 @@ body {
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:100;
+    z-index:9999; /* FIXED */
     flex-direction:column;
 }
-
-.fade {
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:black;
-    animation: fadeOut 2s forwards;
-}
-@keyframes fadeOut { to { opacity:0; } }
 
 .light-rays {
     position:absolute;
@@ -50,7 +42,7 @@ body {
 }
 
 #logo {
-    font-size:12rem;
+    font-size:10rem;
     font-weight:bold;
     color:#e50914;
     letter-spacing:5px;
@@ -61,7 +53,7 @@ body {
 
 .show { opacity:1; transform:scale(1.4); }
 .settle { transform:scale(1); }
-.expand { letter-spacing:40px; }
+.expand { letter-spacing:35px; }
 
 .glow {
     text-shadow:0 0 20px #ff0000,0 0 80px #ff4d6d;
@@ -192,30 +184,36 @@ canvas {
 </div>
 
 <script>
-const logo = document.getElementById("logo");
-const intro = document.getElementById("introScreen");
+window.onload = function(){
 
-/* INTRO TIMELINE */
-setTimeout(()=>{
-    document.getElementById("boom").play();
-    logo.classList.add("show","glow");
-},800);
+    const logo = document.getElementById("logo");
+    const intro = document.getElementById("introScreen");
 
-setTimeout(()=>{
-    logo.classList.add("settle");
-},2000);
+    /* INTRO TIMELINE */
 
-setTimeout(()=>{
-    document.getElementById("whoosh").play();
-    logo.textContent="VIDHUU";
-    logo.classList.add("expand");
-},3000);
+    setTimeout(()=>{
+        document.getElementById("boom").play().catch(()=>{});
+        logo.classList.add("show","glow");
+    },800);
 
-/* END INTRO → SHOW SITE */
-setTimeout(()=>{
-    intro.style.opacity="0";
-    setTimeout(()=> intro.style.display="none",1000);
-},5500);
+    setTimeout(()=>{
+        logo.classList.add("settle");
+    },2000);
+
+    setTimeout(()=>{
+        document.getElementById("whoosh").play().catch(()=>{});
+        logo.textContent="VIDHUU";
+        logo.classList.add("expand");
+    },3000);
+
+    /* END INTRO */
+    setTimeout(()=>{
+        intro.style.opacity="0";
+        intro.style.transition="1s";
+        setTimeout(()=> intro.style.display="none",1000);
+    },5500);
+
+};
 
 /* ---------------- MAIN STORY ---------------- */
 
@@ -227,7 +225,7 @@ function show(i){
 }
 
 function startStory(){
-    document.getElementById("music").play();
+    document.getElementById("music").play().catch(()=>{});
     show(1);
     type("text1","From the moment I met you… everything changed.");
 
