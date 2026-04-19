@@ -300,7 +300,7 @@ document.onclick=(e)=>{
     setTimeout(()=>h.remove(),1000);
 };
 
-/* PARTICLES */
+/* ===== CINEMATIC PARTICLES (FROM 1ST CODE) ===== */
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 
@@ -314,18 +314,18 @@ for(let i=0;i<100;i++){
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
         r:Math.random()*2+1,
-        dx:(Math.random()-0.5)*0.5,
-        dy:(Math.random()-0.5)*0.5
+        dx:Math.random()-0.5,
+        dy:Math.random()-0.5
     });
 }
 
-function animateParticles(){
+function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     particles.forEach(p=>{
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(255,77,109,0.7)";
+        ctx.fillStyle="rgba(255,77,109,0.9)";
         ctx.fill();
 
         p.x+=p.dx;
@@ -335,10 +335,10 @@ function animateParticles(){
         if(p.y<0||p.y>canvas.height) p.dy*=-1;
     });
 
-    requestAnimationFrame(animateParticles);
+    requestAnimationFrame(animate);
 }
 
-animateParticles();
+animate();
 
 </script>
 
