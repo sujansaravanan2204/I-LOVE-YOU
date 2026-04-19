@@ -21,7 +21,7 @@ body {
     overflow:hidden;
 }
 
-/* ===== BACKGROUND VIDEO ===== */
+/* VIDEO */
 video {
     position:fixed;
     width:100%;
@@ -30,7 +30,7 @@ video {
     z-index:-2;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 .overlay {
     position:fixed;
     width:100%;
@@ -40,7 +40,7 @@ video {
     z-index:-1;
 }
 
-/* ===== SECTIONS ===== */
+/* SECTIONS */
 .section {
     position:absolute;
     width:100%;
@@ -58,7 +58,7 @@ video {
     z-index:5;
 }
 
-/* ===== GLASS BOX ===== */
+/* GLASS */
 .glass {
     background: rgba(255,255,255,0.08);
     border-radius:20px;
@@ -75,7 +75,7 @@ video {
     box-shadow: 0 0 30px rgba(255,77,109,0.2);
 }
 
-/* ===== TEXT ===== */
+/* TEXT */
 .neon {
     font-size:2.5rem;
     color:#ff4d6d;
@@ -89,7 +89,7 @@ video {
     text-align:center;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 button {
     margin-top:20px;
     padding:12px 25px;
@@ -100,7 +100,7 @@ button {
     cursor:pointer;
 }
 
-/* ===== PARTICLES ===== */
+/* PARTICLES */
 canvas {
     position:fixed;
     top:0;
@@ -113,18 +113,17 @@ canvas {
 
 <body>
 
-<!-- ===== AUDIO ===== -->
 <audio id="music" src="music.mp3" loop></audio>
 
-<!-- ===== BACKGROUND ===== -->
 <video autoplay muted loop>
     <source src="intro.mp4" type="video/mp4">
 </video>
+
 <div class="overlay"></div>
 <canvas id="particles"></canvas>
 
-<!-- ===== HOME ===== -->
-<div class="section active" id="home">
+<!-- HOME -->
+<div class="section active">
     <div class="glass">
         <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
         <p>Kuttima… my Vidhuma</p>
@@ -132,37 +131,37 @@ canvas {
     </div>
 </div>
 
-<!-- ===== SCENE 1 ===== -->
-<div class="section" id="scene1">
+<!-- SCENE 1 -->
+<div class="section">
     <div class="glass">
         <div class="type" id="text1"></div>
     </div>
 </div>
 
-<!-- ===== SCENE 2 ===== -->
-<div class="section" id="scene2">
+<!-- SCENE 2 -->
+<div class="section">
     <div class="glass">
         <div class="type" id="text2"></div>
     </div>
 </div>
 
-<!-- ===== CHOICE ===== -->
-<div class="section" id="choice">
+<!-- CHOICE -->
+<div class="section">
     <div class="glass">
-        <button onclick="pathLove()">How much do I love you?</button>
-        <button onclick="pathFuture()">Our future?</button>
+        <button onclick="pathLove()">What I felt</button>
+        <button onclick="pathFuture()">Something I never told you</button>
     </div>
 </div>
 
-<!-- ===== RESULT ===== -->
-<div class="section" id="result">
+<!-- RESULT -->
+<div class="section">
     <div class="glass">
         <div class="type" id="resultText"></div>
     </div>
 </div>
 
-<!-- ===== FINAL ===== -->
-<div class="section" id="final">
+<!-- FINAL -->
+<div class="section">
     <div class="glass">
         <h1 class="neon">I Love You ❤️</h1>
     </div>
@@ -170,7 +169,7 @@ canvas {
 
 <script>
 
-/* ===== STORY ===== */
+/* SECTIONS */
 const sections = document.querySelectorAll(".section");
 
 function show(i){
@@ -178,45 +177,51 @@ function show(i){
     sections[i].classList.add("active");
 }
 
+/* STORY FLOW (UPDATED LOVE CONTENT) */
 function startStory(){
     document.getElementById("music").play().catch(()=>{});
     show(1);
 
-    type("text1","From the moment I met you… everything changed.");
+    type("text1",
+    "We met on Hinge…\nWe talked for a month…\nAnd then… Feb 25 happened.");
 
     setTimeout(()=>{
         show(2);
-        type("text2","Kuttima...you are my everything ❤️");
-    },5000);
+        type("text2",
+        "That day… something changed.\nYou became my kuttima ❤️");
+    },6000);
 
-    setTimeout(()=>show(3),10000);
+    setTimeout(()=>show(3),12000);
 }
 
+/* PATHS */
 function pathLove(){
     show(4);
-    type("resultText","I love you in every second of my life.");
-    setTimeout(()=>show(5),6000);
+    type("resultText",
+    "That day… 25 felt different.\nThat’s when I started falling for you.");
+    setTimeout(()=>show(5),7000);
 }
 
 function pathFuture(){
     show(4);
-    type("resultText","I see you in every future of mine.");
-    setTimeout(()=>show(5),6000);
+    type("resultText",
+    "February was not just another month.\nIt was the start of us.");
+    setTimeout(()=>show(5),7000);
 }
 
-/* ===== TYPE EFFECT ===== */
+/* TYPE EFFECT */
 function type(id,text){
     let i=0;
     let el=document.getElementById(id);
     el.innerHTML="";
     let inter=setInterval(()=>{
-        el.innerHTML+=text[i];
+        el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
         i++;
         if(i>=text.length) clearInterval(inter);
     },40);
 }
 
-/* ===== PARTICLES ===== */
+/* PARTICLES */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -260,4 +265,3 @@ animate();
 
 </body>
 </html>
-```
