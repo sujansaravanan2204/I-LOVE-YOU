@@ -299,12 +299,11 @@ document.onclick=(e)=>{
     setTimeout(()=>h.remove(),1000);
 };
 
-/* ===== CINEMATIC PARTICLES ===== */
+/* ===== YOUR EXACT PARTICLES ===== */
 
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
-/* RESIZE */
 function resize(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -312,72 +311,32 @@ function resize(){
 resize();
 window.addEventListener("resize", resize);
 
-/* MOUSE */
-let mouse = { x: null, y: null };
-
-window.addEventListener("mousemove", e=>{
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
-
-/* PARTICLES */
 let particles = [];
-let count = 250;
+let count = 220;
 
 for(let i=0;i<count;i++){
-    let depth = Math.random();
-
     particles.push({
         x: Math.random()*canvas.width,
         y: Math.random()*canvas.height,
-        r: depth*2 + 0.3,
-        dx: (Math.random()-0.5)*(0.2 + depth*0.6),
-        dy: (Math.random()-0.5)*(0.2 + depth*0.6),
-        opacity: Math.random(),
-        depth: depth,
-        twinkleSpeed: Math.random()*0.02 + 0.005
+        r: Math.random()*1.5 + 0.3,
+        dx: (Math.random()-0.5)*0.2,
+        dy: (Math.random()-0.5)*0.2,
+        opacity: Math.random()
     });
 }
 
-/* ANIMATION */
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     particles.forEach(p=>{
-
-        /* TWINKLE */
-        p.opacity += p.twinkleSpeed;
-        if(p.opacity > 1 || p.opacity < 0.2){
-            p.twinkleSpeed *= -1;
-        }
-
-        /* MOUSE EFFECT */
-        if(mouse.x && mouse.y){
-            let dx = p.x - mouse.x;
-            let dy = p.y - mouse.y;
-            let dist = Math.sqrt(dx*dx + dy*dy);
-
-            if(dist < 120){
-                p.x += dx / dist;
-                p.y += dy / dist;
-            }
-        }
-
-        /* DRAW */
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-
-        ctx.shadowBlur = 8 * p.depth;
-        ctx.shadowColor = "#ff4d6d";
-
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
         ctx.fillStyle = `rgba(255,77,109,${p.opacity})`;
         ctx.fill();
 
-        /* MOVE */
         p.x += p.dx;
         p.y += p.dy;
 
-        /* WRAP */
         if(p.x < 0) p.x = canvas.width;
         if(p.x > canvas.width) p.x = 0;
         if(p.y < 0) p.y = canvas.height;
