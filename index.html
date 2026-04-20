@@ -87,6 +87,8 @@ video {
     line-height:1.6;
     max-width:80%;
     text-align:center;
+    opacity:0;
+    transition: opacity 1.5s ease;
 }
 
 /* ===== BUTTON ===== */
@@ -113,17 +115,16 @@ canvas {
 
 <body>
 
-<!-- ===== AUDIO ===== -->
 <audio id="music" src="music.mp3" loop></audio>
 
-<!-- ===== BACKGROUND ===== -->
 <video autoplay muted loop>
     <source src="intro.mp4" type="video/mp4">
 </video>
+
 <div class="overlay"></div>
 <canvas id="particles"></canvas>
 
-<!-- ===== HOME ===== -->
+<!-- HOME -->
 <div class="section active" id="home">
     <div class="glass">
         <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
@@ -132,21 +133,21 @@ canvas {
     </div>
 </div>
 
-<!-- ===== SCENE 1 ===== -->
+<!-- SCENE 1 -->
 <div class="section" id="scene1">
     <div class="glass">
         <div class="type" id="text1"></div>
     </div>
 </div>
 
-<!-- ===== SCENE 2 ===== -->
+<!-- SCENE 2 -->
 <div class="section" id="scene2">
     <div class="glass">
         <div class="type" id="text2"></div>
     </div>
 </div>
 
-<!-- ===== CHOICE ===== -->
+<!-- CHOICE -->
 <div class="section" id="choice">
     <div class="glass">
         <button onclick="pathLove()">How much do I love you?</button>
@@ -154,14 +155,14 @@ canvas {
     </div>
 </div>
 
-<!-- ===== RESULT ===== -->
+<!-- RESULT -->
 <div class="section" id="result">
     <div class="glass">
         <div class="type" id="resultText"></div>
     </div>
 </div>
 
-<!-- ===== FINAL ===== -->
+<!-- FINAL -->
 <div class="section" id="final">
     <div class="glass">
         <h1 class="neon">I Love You ❤️</h1>
@@ -170,7 +171,7 @@ canvas {
 
 <script>
 
-/* ===== STORY ===== */
+/* ===== SECTION CONTROL ===== */
 const sections = document.querySelectorAll(".section");
 
 function show(i){
@@ -178,15 +179,32 @@ function show(i){
     sections[i].classList.add("active");
 }
 
+/* ===== CINEMATIC TEXT ===== */
+function cinematicText(id, text) {
+    let el = document.getElementById(id);
+
+    el.innerHTML = text;
+    el.style.opacity = 0;
+
+    setTimeout(() => {
+        el.style.opacity = 1;
+    }, 100);
+
+    setTimeout(() => {
+        el.style.opacity = 0;
+    }, 4000);
+}
+
+/* ===== STORY FLOW ===== */
 function startStory(){
     document.getElementById("music").play().catch(()=>{});
-    show(1);
 
-    type("text1","From the moment I met you… everything changed.");
+    show(1);
+    cinematicText("text1","From the moment I met you… everything changed.");
 
     setTimeout(()=>{
         show(2);
-        type("text2","Kuttima...you are my everything ❤️");
+        cinematicText("text2","Kuttima... you are my everything ❤️");
     },5000);
 
     setTimeout(()=>show(3),10000);
@@ -194,26 +212,14 @@ function startStory(){
 
 function pathLove(){
     show(4);
-    type("resultText","I love you in every second of my life.");
+    cinematicText("resultText","I love you in every second of my life.");
     setTimeout(()=>show(5),6000);
 }
 
 function pathFuture(){
     show(4);
-    type("resultText","I see you in every future of mine.");
+    cinematicText("resultText","I see you in every future of mine.");
     setTimeout(()=>show(5),6000);
-}
-
-/* ===== TYPE EFFECT ===== */
-function type(id,text){
-    let i=0;
-    let el=document.getElementById(id);
-    el.innerHTML="";
-    let inter=setInterval(()=>{
-        el.innerHTML+=text[i];
-        i++;
-        if(i>=text.length) clearInterval(inter);
-    },40);
 }
 
 /* ===== PARTICLES ===== */
@@ -225,13 +231,13 @@ canvas.height = window.innerHeight;
 
 let particles=[];
 
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
     particles.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
         r:Math.random()*2+1,
-        dx:Math.random()-0.5,
-        dy:Math.random()-0.5
+        dx:(Math.random()-0.5)*0.5,
+        dy:(Math.random()-0.5)*0.5
     });
 }
 
@@ -260,4 +266,3 @@ animate();
 
 </body>
 </html>
-```
