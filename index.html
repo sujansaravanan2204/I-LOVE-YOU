@@ -6,11 +6,23 @@
 <title>For Pavithra ❤️</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
-body{background:black;color:white;overflow:hidden;}
 
-/* VIDEO */
-video{
+/* ===== GLOBAL ===== */
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body {
+    background:black;
+    color:white;
+    overflow:hidden;
+}
+
+/* ===== BACKGROUND VIDEO ===== */
+video {
     position:fixed;
     width:100%;
     height:100%;
@@ -18,25 +30,18 @@ video{
     z-index:-2;
 }
 
-/* PARTICLES */
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-}
-
-/* OVERLAY */
-.overlay{
+/* DARK OVERLAY */
+.overlay {
     position:fixed;
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.6);
     backdrop-filter: blur(6px);
+    z-index:-1;
 }
 
-/* SECTIONS */
-.section{
+/* ===== SECTIONS ===== */
+.section {
     position:absolute;
     width:100%;
     height:100vh;
@@ -45,283 +50,188 @@ canvas{
     align-items:center;
     flex-direction:column;
     opacity:0;
-    transform:scale(0.95);
     transition:1s;
 }
-.active{
+
+.active {
     opacity:1;
-    transform:scale(1);
     z-index:5;
 }
 
-/* GLASS */
-.glass{
+/* ===== GLASS BOX ===== */
+.glass {
     background: rgba(255,255,255,0.08);
     border-radius:20px;
-    padding:30px;
+    padding:40px 30px;
     backdrop-filter: blur(15px);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:15px;
+    border:1px solid rgba(255,255,255,0.2);
     text-align:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
     box-shadow: 0 0 30px rgba(255,77,109,0.2);
 }
 
-/* TEXT */
-.neon{
-    font-size:2.3rem;
+/* ===== TEXT ===== */
+.neon {
+    font-size:2.5rem;
     color:#ff4d6d;
-    text-shadow:0 0 10px #ff4d6d;
+    text-shadow:0 0 10px #ff4d6d,0 0 30px #ff4d6d;
 }
 
-.fadeText{
-    font-size:1.5rem;
-    opacity:0;
-    transition:opacity 1.5s ease;
+.type {
+    font-size:1.6rem;
+    line-height:1.6;
     max-width:80%;
+    text-align:center;
 }
-.showText{opacity:1;}
 
-button{
-    padding:10px 20px;
+/* ===== BUTTON ===== */
+button {
+    margin-top:20px;
+    padding:12px 25px;
     border:none;
-    border-radius:20px;
+    border-radius:30px;
     background:#ff4d6d;
     color:white;
     cursor:pointer;
 }
 
-input{
-    padding:10px;
-    border-radius:10px;
-    border:none;
-    text-align:center;
+/* ===== PARTICLES ===== */
+canvas {
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
 }
 
-/* MEMORY */
-.memory img{
-    width:200px;
-    border-radius:10px;
-}
-
-/* HEART */
-.heart{
-    position:absolute;
-    animation:fade 1s forwards;
-}
-@keyframes fade{
-    to{opacity:0; transform:translateY(-20px);}
-}
 </style>
 </head>
 
 <body>
 
+<!-- ===== AUDIO ===== -->
 <audio id="music" src="music.mp3" loop></audio>
 
+<!-- ===== BACKGROUND ===== -->
 <video autoplay muted loop>
-<source src="intro.mp4">
+    <source src="intro.mp4" type="video/mp4">
 </video>
-
-<canvas id="particles"></canvas>
 <div class="overlay"></div>
+<canvas id="particles"></canvas>
 
-<!-- HOME -->
-<div class="section active">
-<div class="glass">
-<h1 class="neon">Pavithra Vidhukshana ❤️</h1>
-<p>Kuttima… my Vidhuma</p>
-<button onclick="start()">Start</button>
-</div>
-</div>
-
-<!-- STORY -->
-<div class="section">
-<div class="glass">
-<div id="story" class="fadeText"></div>
-</div>
+<!-- ===== HOME ===== -->
+<div class="section active" id="home">
+    <div class="glass">
+        <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
+        <p>Kuttima… my Vidhuma</p>
+        <button onclick="startStory()">Start</button>
+    </div>
 </div>
 
-<!-- CHOICE -->
-<div class="section">
-<div class="glass">
-<button onclick="path1()">What I felt</button>
-<button onclick="path2()">Something I never told you</button>
-<p style="font-size:0.8rem;">(Some things are hidden… explore)</p>
-</div>
+<!-- ===== SCENE 1 ===== -->
+<div class="section" id="scene1">
+    <div class="glass">
+        <div class="type" id="text1"></div>
+    </div>
 </div>
 
-<!-- RESULT -->
-<div class="section">
-<div class="glass">
-<div id="result" class="fadeText"></div>
-<p style="font-size:0.8rem;">Maybe numbers matter too…</p>
-</div>
-</div>
-
-<!-- PUZZLE -->
-<div class="section">
-<div class="glass">
-<p>Enter what matters</p>
-<input id="code" placeholder="????">
-<button onclick="unlock()">Unlock</button>
-<p style="font-size:0.8rem;">
-Think about our first day… and what I call you ❤️
-</p>
-</div>
+<!-- ===== SCENE 2 ===== -->
+<div class="section" id="scene2">
+    <div class="glass">
+        <div class="type" id="text2"></div>
+    </div>
 </div>
 
-<!-- MEMORY -->
-<div class="section">
-<div class="glass memory">
-<p class="fadeText showText">You remembered… ❤️</p>
-
-<img src="memory1.jpg">
-<p>That day… I was nervous</p>
-
-<img src="memory2.jpg">
-<p>This is when you became important</p>
-
-<button onclick="final()">Continue</button>
-</div>
+<!-- ===== CHOICE ===== -->
+<div class="section" id="choice">
+    <div class="glass">
+        <button onclick="pathLove()">How much do I love you?</button>
+        <button onclick="pathFuture()">Our future?</button>
+    </div>
 </div>
 
-<!-- FINAL -->
-<div class="section">
-<div class="glass">
-<h1 class="neon">I Love You ❤️</h1>
+<!-- ===== RESULT ===== -->
+<div class="section" id="result">
+    <div class="glass">
+        <div class="type" id="resultText"></div>
+    </div>
 </div>
+
+<!-- ===== FINAL ===== -->
+<div class="section" id="final">
+    <div class="glass">
+        <h1 class="neon">I Love You ❤️</h1>
+    </div>
 </div>
 
 <script>
 
-/* SECTIONS */
-let sections=document.querySelectorAll(".section");
+/* ===== STORY ===== */
+const sections = document.querySelectorAll(".section");
+
 function show(i){
     sections.forEach(s=>s.classList.remove("active"));
     sections[i].classList.add("active");
 }
 
-/* CINEMATIC TEXT */
-function cinematicText(id, lines, delay=2500){
-    let el=document.getElementById(id);
-    let i=0;
-
-    function next(){
-        if(i>=lines.length) return;
-
-        el.classList.remove("showText");
-
-        setTimeout(()=>{
-            el.innerHTML=lines[i];
-            el.classList.add("showText");
-            i++;
-            setTimeout(next,delay);
-        },800);
-    }
-    next();
-}
-
-/* START */
-function start(){
+function startStory(){
     document.getElementById("music").play().catch(()=>{});
     show(1);
 
-    cinematicText("story",[
-        "We met on Hinge…",
-        "We talked for a month…",
-        "And then… Feb 25 happened.",
-        "Something changed."
-    ]);
+    type("text1","From the moment I met you… everything changed.");
 
-    setTimeout(()=>show(2),9000);
+    setTimeout(()=>{
+        show(2);
+        type("text2","Kuttima...you are my everything ❤️");
+    },5000);
+
+    setTimeout(()=>show(3),10000);
 }
 
-/* PATHS */
-function path1(){
-    show(3);
-    cinematicText("result",[
-        "That day… 25 felt different."
-    ]);
-    setTimeout(()=>show(4),4000);
+function pathLove(){
+    show(4);
+    type("resultText","I love you in every second of my life.");
+    setTimeout(()=>show(5),6000);
 }
 
-function path2(){
-    show(3);
-    cinematicText("result",[
-        "February was not just another month."
-    ]);
-    setTimeout(()=>show(4),4000);
+function pathFuture(){
+    show(4);
+    type("resultText","I see you in every future of mine.");
+    setTimeout(()=>show(5),6000);
 }
 
-/* HIDDEN CLUE */
-document.body.addEventListener("click",(e)=>{
-    if(e.clientX < 100 && e.clientY < 100){
-        alert("You became my kuttima ❤️");
-    }
-});
-
-/* PUZZLE */
-let tries=0;
-
-function unlock(){
-    let val=document.getElementById("code").value.toLowerCase();
-    tries++;
-
-    if(val==="2502kuttima"){
-        show(5);
-    }else{
-        if(tries==2){
-            alert("Maybe… 25/02 means something ❤️");
-        }
-        else if(tries==3){
-            alert("And maybe… what I call you ❤️");
-        }
-        else{
-            alert("Not quite… look deeper ❤️");
-        }
-    }
+/* ===== TYPE EFFECT ===== */
+function type(id,text){
+    let i=0;
+    let el=document.getElementById(id);
+    el.innerHTML="";
+    let inter=setInterval(()=>{
+        el.innerHTML+=text[i];
+        i++;
+        if(i>=text.length) clearInterval(inter);
+    },40);
 }
 
-function final(){
-    show(6);
-}
-
-/* HEART EFFECT */
-document.onclick=(e)=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=e.pageX+"px";
-    h.style.top=e.pageY+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),1000);
-};
-
-/* ===== YOUR EXACT PARTICLES ===== */
-
+/* ===== PARTICLES ===== */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
-function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-let particles = [];
-let count = 220;
+let particles=[];
 
-for(let i=0;i<count;i++){
+for(let i=0;i<100;i++){
     particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*1.5 + 0.3,
-        dx: (Math.random()-0.5)*0.2,
-        dy: (Math.random()-0.5)*0.2,
-        opacity: Math.random()
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2+1,
+        dx:Math.random()-0.5,
+        dy:Math.random()-0.5
     });
 }
 
@@ -331,16 +241,14 @@ function animate(){
     particles.forEach(p=>{
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle = `rgba(255,77,109,${p.opacity})`;
+        ctx.fillStyle="rgba(255,77,109,0.7)";
         ctx.fill();
 
-        p.x += p.dx;
-        p.y += p.dy;
+        p.x+=p.dx;
+        p.y+=p.dy;
 
-        if(p.x < 0) p.x = canvas.width;
-        if(p.x > canvas.width) p.x = 0;
-        if(p.y < 0) p.y = canvas.height;
-        if(p.y > canvas.height) p.y = 0;
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
     });
 
     requestAnimationFrame(animate);
@@ -352,3 +260,4 @@ animate();
 
 </body>
 </html>
+```
