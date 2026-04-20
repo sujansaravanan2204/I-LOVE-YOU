@@ -130,7 +130,7 @@ input{
 <!-- HOME -->
 <div class="section active">
 <div class="glass">
-<h1 class="neon">Pavithra ❤️</h1>
+<h1 class="neon">Pavithra Vidhukshana ❤️</h1>
 <p>Kuttima… my Vidhuma</p>
 <button onclick="start()">Start</button>
 </div>
@@ -300,7 +300,7 @@ document.onclick=(e)=>{
     setTimeout(()=>h.remove(),1000);
 };
 
-/* ===== PERFECT STAR-LIKE PARTICLES ===== */
+/* ===== STAR-LIKE RED PARTICLES ===== */
 
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
@@ -342,6 +342,7 @@ function animate(){
         p.x += p.dx;
         p.y += p.dy;
 
+        // wrap edges (smooth infinite movement)
         if(p.x < 0) p.x = canvas.width;
         if(p.x > canvas.width) p.x = 0;
         if(p.y < 0) p.y = canvas.height;
