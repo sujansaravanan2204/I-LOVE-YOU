@@ -3,123 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Pavithra ❤️</title>
+<title>For Kuttima ❤️</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:black;color:white;overflow:hidden;}
 
-/* ===== GLOBAL ===== */
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
+.section{
+    position:absolute;width:100%;height:100vh;
+    display:flex;justify-content:center;align-items:center;
+    flex-direction:column;opacity:0;transition:1s;
 }
+.active{opacity:1;z-index:5;}
 
-body {
-    background:black;
-    color:white;
-    overflow:hidden;
-}
-
-/* ===== SECTIONS ===== */
-.section {
-    position:absolute;
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    opacity:0;
-    transition:1s;
-}
-
-.active {
-    opacity:1;
-    z-index:5;
-}
-
-/* ===== GLASS ===== */
-.glass {
-    background: rgba(255,255,255,0.08);
-    border-radius:20px;
-    padding:50px 40px; /* restored spacing */
-    backdrop-filter: blur(15px);
+.glass{
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;padding:50px 40px;
+    backdrop-filter:blur(15px);
     border:1px solid rgba(255,255,255,0.2);
     text-align:center;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    max-width:600px;
-    width:90%;
-
-    box-shadow: 0 0 30px rgba(255,77,109,0.2);
+    max-width:600px;width:90%;
+    box-shadow:0 0 30px rgba(255,77,109,0.2);
 }
 
-/* ===== TEXT ===== */
-.neon {
-    font-size:2.6rem;
-    color:#ff4d6d;
+.neon{
+    font-size:2.5rem;color:#ff4d6d;
     text-shadow:0 0 10px #ff4d6d,0 0 30px #ff4d6d;
     margin-bottom:15px;
 }
 
-.type {
-    font-size:1.5rem;
-    line-height:1.7;
-    max-width:85%;
-    text-align:center;
-    opacity:0;
-    transition: opacity 1.5s ease;
+.type{
+    font-size:1.4rem;line-height:1.7;
+    opacity:0;transition:1.5s;
 }
 
-/* ===== BUTTON ===== */
-button {
-    margin-top:25px;
-    padding:12px 28px;
-    border:none;
-    border-radius:30px;
-    background:#ff4d6d;
-    color:white;
-    cursor:pointer;
-    font-size:1rem;
+/* BUTTON */
+button{
+    margin-top:20px;padding:12px 28px;
+    border:none;border-radius:30px;
+    background:#ff4d6d;color:white;
+    cursor:pointer;font-size:1rem;
 }
 
-/* ===== BACK BUTTON ===== */
-.back {
-    position:absolute;
-    top:25px;
-    left:30px;
-    font-size:30px;
-    cursor:pointer;
-    opacity:0.8;
-    transition:0.3s;
+/* BACK */
+.back{
+    position:absolute;top:25px;left:30px;
+    font-size:30px;cursor:pointer;
 }
 
-.back:hover {
-    opacity:1;
-    transform:scale(1.2);
-}
-
-/* ===== PARTICLES ===== */
-canvas {
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-}
-
+/* PARTICLES */
+canvas{position:fixed;top:0;left:0;z-index:-1;}
 </style>
 </head>
 
 <body>
 
-<!-- AUDIO -->
-<audio id="music" loop preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="music" loop>
+    <source src="music.mp3">
 </audio>
 
 <canvas id="particles"></canvas>
@@ -127,194 +67,177 @@ canvas {
 <!-- HOME -->
 <div class="section active">
     <div class="glass">
-        <h1 class="neon">Pavithra Vidhukshana ❤️</h1>
-        <p>Kuttima… my Vidhuma</p>
+        <h1 class="neon">Kuttima ❤️</h1>
+        <p>This isn’t just a page… this is us.</p>
         <button onclick="startStory()">Start</button>
     </div>
 </div>
 
-<!-- SCENE 1 -->
-<div class="section">
-    <div class="glass">
-        <div class="type" id="text1"></div>
-    </div>
-</div>
+<!-- STORY 1 -->
+<div class="section"><div class="glass"><div class="type" id="t1"></div></div></div>
 
-<!-- SCENE 2 -->
-<div class="section">
-    <div class="glass">
-        <div class="type" id="text2"></div>
-    </div>
-</div>
+<!-- STORY 2 -->
+<div class="section"><div class="glass"><div class="type" id="t2"></div></div></div>
+
+<!-- STORY 3 -->
+<div class="section"><div class="glass"><div class="type" id="t3"></div></div></div>
+
+<!-- STORY 4 -->
+<div class="section"><div class="glass"><div class="type" id="t4"></div></div></div>
 
 <!-- CHOICE -->
 <div class="section">
-    <div class="glass">
-        <button onclick="pathLove()">How much do I love you?</button>
-        <button onclick="pathFuture()">Our future?</button>
-    </div>
+<div class="glass">
+    <button onclick="pathLove()">How much do I love you?</button>
+    <button onclick="pathFuture()">Our future?</button>
+</div>
 </div>
 
 <!-- RESULT -->
 <div class="section">
-    <div class="back" onclick="goBack()">←</div>
-    <div class="glass">
-        <div class="type" id="resultText"></div>
-    </div>
+<div class="back" onclick="goBack()">←</div>
+<div class="glass"><div class="type" id="result"></div></div>
 </div>
 
 <!-- FINAL -->
 <div class="section">
-    <div class="back" onclick="goBack()">←</div>
-    <div class="glass">
-        <h1 class="neon">I Love You ❤️</h1>
-    </div>
+<div class="back" onclick="goBack()">←</div>
+<div class="glass"><h1 class="neon">I Love You ❤️</h1></div>
 </div>
 
 <!-- PROPOSAL -->
 <div class="section">
-    <div class="glass">
-
-        <div class="type" id="proposalText1"></div>
-        <h2 class="neon" id="proposalText2" style="opacity:0;"></h2>
-
-        <button onclick="sayYes()">Yes 💖</button>
-        <button onclick="sayNo()">No 😅</button>
-
-    </div>
+<div class="back" onclick="goBack()">←</div>
+<div class="glass">
+    <h2 class="neon">Can I call you mine? ❤️</h2>
+    <button onclick="sayYes()">Yes 💖</button>
+    <button id="noBtn" onmouseover="runAway()">No 😈</button>
+</div>
 </div>
 
 <script>
 
-/* ===== SECTIONS ===== */
-const sections = document.querySelectorAll(".section");
-
+const sections=document.querySelectorAll(".section");
 function show(i){
     sections.forEach(s=>s.classList.remove("active"));
     sections[i].classList.add("active");
 }
 
-/* ===== TEXT ===== */
-function cinematicText(id, text) {
-    let el = document.getElementById(id);
-
-    el.innerHTML = text;
-    el.style.opacity = 0;
-
-    setTimeout(()=> el.style.opacity = 1, 100);
-    setTimeout(()=> el.style.opacity = 0, 4000);
+function text(id,content){
+    let el=document.getElementById(id);
+    el.innerHTML=content;
+    el.style.opacity=1;
 }
 
-/* ===== START ===== */
+/* START */
 function startStory(){
 
-    const music = document.getElementById("music");
+    let m=document.getElementById("music");
+    m.volume=0;
+    m.play();
 
-    music.volume = 0;
-    music.play().then(()=>{
-        let vol = 0;
-        let fade = setInterval(()=>{
-            if(vol < 0.6){
-                vol += 0.02;
-                music.volume = vol;
-            } else {
-                clearInterval(fade);
-            }
-        },100);
-    }).catch(()=>{});
+    let v=0;
+    let f=setInterval(()=>{
+        if(v<0.6){v+=0.02;m.volume=v;}
+        else clearInterval(f);
+    },100);
 
     show(1);
-    cinematicText("text1","From the moment I met you… everything changed.");
+    text("t1","It started from Hinge… just a normal match… nothing special.");
 
     setTimeout(()=>{
         show(2);
-        cinematicText("text2","Kuttima... you are my everything ❤️");
-    },5000);
+        text("t2","But then I saw you… standing there at our spot in MG Road… playing with that ginger cat… and damn… you were stunning.");
+    },4000);
 
-    setTimeout(()=>show(3),10000);
+    setTimeout(()=>{
+        show(3);
+        text("t3","That moment when you held my hand after dinner… I swear… butterflies went crazy inside me.");
+    },8000);
+
+    setTimeout(()=>{
+        show(4);
+        text("t4","And in that metro ride… when we both knew it wasn’t just a meetup… it was a date… I was honestly stunned.");
+    },12000);
+
+    setTimeout(()=>show(5),16000);
 }
 
-/* ===== PATHS ===== */
+/* PATHS */
 function pathLove(){
-    show(4);
-    cinematicText("resultText","I love you in every second of my life.");
-    setTimeout(()=>show(5),6000);
-    setTimeout(()=>showProposal(),9000);
+    show(6);
+    text("result","It’s not just love… it’s the way your voice calms me… the way you pamper me… you make my inner child feel safe.");
+    setTimeout(()=>show(7),5000);
+    setTimeout(()=>show(8),8000);
 }
 
 function pathFuture(){
-    show(4);
-    cinematicText("resultText","I see you in every future of mine.");
-    setTimeout(()=>show(5),6000);
-    setTimeout(()=>showProposal(),9000);
-}
-
-/* ===== PROPOSAL ===== */
-function showProposal(){
     show(6);
-
-    cinematicText("proposalText1","After everything we've shared...");
-
-    setTimeout(()=>{
-        let el = document.getElementById("proposalText2");
-        el.innerHTML = "Can I call you mine? ❤️";
-        el.style.opacity = 1;
-    },2500);
+    text("result","Even after fights… you stayed… you understood… you chose me… and that’s when I knew… I want you.");
+    setTimeout(()=>show(7),5000);
+    setTimeout(()=>show(8),8000);
 }
 
-/* ===== BUTTONS ===== */
+/* BACK */
+function goBack(){show(5);}
+
+/* YES */
 function sayYes(){
-    alert("You just made me really, really happy ❤️");
+    explode();
+    setTimeout(()=>alert("You just made me the happiest ❤️"),1500);
 }
 
-function sayNo(){
-    alert("Okay… but I'm still not giving up on you 😌");
+/* HEART EXPLOSION */
+function explode(){
+    for(let i=0;i<40;i++){
+        let h=document.createElement("div");
+        h.innerHTML="❤️";
+        h.style.position="fixed";
+        h.style.left="50%";
+        h.style.top="50%";
+        document.body.appendChild(h);
+
+        let x=(Math.random()-0.5)*500;
+        let y=(Math.random()-0.5)*500;
+
+        h.animate([
+            {transform:"translate(0,0)",opacity:1},
+            {transform:`translate(${x}px,${y}px)`,opacity:0}
+        ],{duration:1500});
+
+        setTimeout(()=>h.remove(),1500);
+    }
 }
 
-/* ===== BACK ===== */
-function goBack(){
-    show(3);
+/* NO RUN */
+function runAway(){
+    let b=document.getElementById("noBtn");
+    b.style.position="absolute";
+    b.style.left=Math.random()*window.innerWidth+"px";
+    b.style.top=Math.random()*window.innerHeight+"px";
 }
 
-/* ===== PARTICLES ===== */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;canvas.height=innerHeight;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles=[];
-
+let p=[];
 for(let i=0;i<120;i++){
-    particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2+1,
-        dx:(Math.random()-0.5)*0.5,
-        dy:(Math.random()-0.5)*0.5
-    });
+    p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height});
 }
 
-function animate(){
+function anim(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p=>{
+    p.forEach(pt=>{
         ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.arc(pt.x,pt.y,2,0,Math.PI*2);
         ctx.fillStyle="rgba(255,77,109,0.7)";
         ctx.fill();
-
-        p.x+=p.dx;
-        p.y+=p.dy;
-
-        if(p.x<0||p.x>canvas.width) p.dx*=-1;
-        if(p.y<0||p.y>canvas.height) p.dy*=-1;
     });
-
-    requestAnimationFrame(animate);
+    requestAnimationFrame(anim);
 }
-
-animate();
+anim();
 
 </script>
 
