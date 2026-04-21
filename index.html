@@ -43,44 +43,57 @@ body {
 .glass {
     background: rgba(255,255,255,0.08);
     border-radius:20px;
-    padding:40px 30px;
+    padding:50px 40px; /* restored spacing */
     backdrop-filter: blur(15px);
     border:1px solid rgba(255,255,255,0.2);
     text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    max-width:600px;
+    width:90%;
+
     box-shadow: 0 0 30px rgba(255,77,109,0.2);
 }
 
 /* ===== TEXT ===== */
 .neon {
-    font-size:2.5rem;
+    font-size:2.6rem;
     color:#ff4d6d;
     text-shadow:0 0 10px #ff4d6d,0 0 30px #ff4d6d;
+    margin-bottom:15px;
 }
 
 .type {
-    font-size:1.6rem;
+    font-size:1.5rem;
+    line-height:1.7;
+    max-width:85%;
+    text-align:center;
     opacity:0;
-    transition:1.5s;
+    transition: opacity 1.5s ease;
 }
 
 /* ===== BUTTON ===== */
 button {
-    margin-top:20px;
-    padding:12px 25px;
+    margin-top:25px;
+    padding:12px 28px;
     border:none;
     border-radius:30px;
     background:#ff4d6d;
     color:white;
     cursor:pointer;
+    font-size:1rem;
 }
 
 /* ===== BACK BUTTON ===== */
 .back {
     position:absolute;
-    top:20px;
-    left:25px;
-    font-size:28px;
-    color:white;
+    top:25px;
+    left:30px;
+    font-size:30px;
     cursor:pointer;
     opacity:0.8;
     transition:0.3s;
@@ -158,9 +171,22 @@ canvas {
     </div>
 </div>
 
+<!-- PROPOSAL -->
+<div class="section">
+    <div class="glass">
+
+        <div class="type" id="proposalText1"></div>
+        <h2 class="neon" id="proposalText2" style="opacity:0;"></h2>
+
+        <button onclick="sayYes()">Yes 💖</button>
+        <button onclick="sayNo()">No 😅</button>
+
+    </div>
+</div>
+
 <script>
 
-/* ===== SECTION CONTROL ===== */
+/* ===== SECTIONS ===== */
 const sections = document.querySelectorAll(".section");
 
 function show(i){
@@ -168,7 +194,7 @@ function show(i){
     sections[i].classList.add("active");
 }
 
-/* ===== CINEMATIC TEXT ===== */
+/* ===== TEXT ===== */
 function cinematicText(id, text) {
     let el = document.getElementById(id);
 
@@ -179,14 +205,13 @@ function cinematicText(id, text) {
     setTimeout(()=> el.style.opacity = 0, 4000);
 }
 
-/* ===== START STORY + MUSIC ===== */
+/* ===== START ===== */
 function startStory(){
 
     const music = document.getElementById("music");
 
     music.volume = 0;
     music.play().then(()=>{
-
         let vol = 0;
         let fade = setInterval(()=>{
             if(vol < 0.6){
@@ -196,7 +221,6 @@ function startStory(){
                 clearInterval(fade);
             }
         },100);
-
     }).catch(()=>{});
 
     show(1);
@@ -214,20 +238,42 @@ function startStory(){
 function pathLove(){
     show(4);
     cinematicText("resultText","I love you in every second of my life.");
-
     setTimeout(()=>show(5),6000);
+    setTimeout(()=>showProposal(),9000);
 }
 
 function pathFuture(){
     show(4);
     cinematicText("resultText","I see you in every future of mine.");
-
     setTimeout(()=>show(5),6000);
+    setTimeout(()=>showProposal(),9000);
 }
 
-/* ===== BACK BUTTON ===== */
+/* ===== PROPOSAL ===== */
+function showProposal(){
+    show(6);
+
+    cinematicText("proposalText1","After everything we've shared...");
+
+    setTimeout(()=>{
+        let el = document.getElementById("proposalText2");
+        el.innerHTML = "Can I call you mine? ❤️";
+        el.style.opacity = 1;
+    },2500);
+}
+
+/* ===== BUTTONS ===== */
+function sayYes(){
+    alert("You just made me really, really happy ❤️");
+}
+
+function sayNo(){
+    alert("Okay… but I'm still not giving up on you 😌");
+}
+
+/* ===== BACK ===== */
 function goBack(){
-    show(3); // always go back to choice
+    show(3);
 }
 
 /* ===== PARTICLES ===== */
