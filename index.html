@@ -33,10 +33,11 @@ body{background:black;color:white;overflow:hidden;}
 }
 
 .type{
-    font-size:1.4rem;line-height:1.8;
-    opacity:0;transition:2s;
+    font-size:1.4rem;line-height:1.7;
+    opacity:0;transition:1.5s;
 }
 
+/* BUTTON */
 button{
     margin-top:20px;padding:12px 28px;
     border:none;border-radius:30px;
@@ -44,11 +45,13 @@ button{
     cursor:pointer;font-size:1rem;
 }
 
+/* BACK */
 .back{
     position:absolute;top:25px;left:30px;
     font-size:30px;cursor:pointer;
 }
 
+/* PARTICLES */
 canvas{position:fixed;top:0;left:0;z-index:-1;}
 </style>
 </head>
@@ -70,10 +73,16 @@ canvas{position:fixed;top:0;left:0;z-index:-1;}
     </div>
 </div>
 
-<!-- STORY -->
+<!-- STORY 1 -->
 <div class="section"><div class="glass"><div class="type" id="t1"></div></div></div>
+
+<!-- STORY 2 -->
 <div class="section"><div class="glass"><div class="type" id="t2"></div></div></div>
+
+<!-- STORY 3 -->
 <div class="section"><div class="glass"><div class="type" id="t3"></div></div></div>
+
+<!-- STORY 4 -->
 <div class="section"><div class="glass"><div class="type" id="t4"></div></div></div>
 
 <!-- CHOICE -->
@@ -138,35 +147,35 @@ function startStory(){
 
     setTimeout(()=>{
         show(2);
-        text("t2","Then I saw you… at our spot in MG Road… playing with that ginger cat… and I swear… you were stunning.");
-    },6000);
+        text("t2","But then I saw you… standing there at our spot in MG Road… playing with that ginger cat… and damn… you were stunning.");
+    },4000);
 
     setTimeout(()=>{
         show(3);
-        text("t3","That moment when you held my hand… after dinner… my chest was full of butterflies… I couldn’t even think straight.");
-    },12000);
+        text("t3","That moment when you held my hand after dinner… I swear… butterflies went crazy inside me.");
+    },8000);
 
     setTimeout(()=>{
         show(4);
-        text("t4","And that metro ride… when we both knew… it wasn’t just a meetup… it was a date… I was honestly stunned.");
-    },18000);
+        text("t4","And in that metro ride… when we both knew it wasn’t just a meetup… it was a date… I was honestly stunned.");
+    },12000);
 
-    setTimeout(()=>show(5),24000);
+    setTimeout(()=>show(5),16000);
 }
 
 /* PATHS */
 function pathLove(){
     show(6);
-    text("result","It’s not just love… it’s your voice… it calms me… the way you pamper me… you make me feel safe.");
-    setTimeout(()=>show(7),7000);
-    setTimeout(()=>show(8),11000);
+    text("result","It’s not just love… it’s the way your voice calms me… the way you pamper me… you make my inner child feel safe.");
+    setTimeout(()=>show(7),5000);
+    setTimeout(()=>show(8),8000);
 }
 
 function pathFuture(){
     show(6);
-    text("result","Even after misunderstandings… you stayed… you chose me… you said sorry… and that’s when I knew… I want you.");
-    setTimeout(()=>show(7),7000);
-    setTimeout(()=>show(8),11000);
+    text("result","Even after fights… you stayed… you understood… you chose me… and that’s when I knew… I want you.");
+    setTimeout(()=>show(7),5000);
+    setTimeout(()=>show(8),8000);
 }
 
 /* BACK */
@@ -200,21 +209,12 @@ function explode(){
     }
 }
 
-/* FIXED NO BUTTON */
+/* NO RUN */
 function runAway(){
     let b=document.getElementById("noBtn");
-
-    let x=Math.random()*(window.innerWidth-100);
-    let y=Math.random()*(window.innerHeight-50);
-
     b.style.position="absolute";
-    b.style.left=x+"px";
-    b.style.top=y+"px";
-
-    // return back after 1.2s
-    setTimeout(()=>{
-        b.style.position="static";
-    },1200);
+    b.style.left=Math.random()*window.innerWidth+"px";
+    b.style.top=Math.random()*window.innerHeight+"px";
 }
 
 /* PARTICLES */
