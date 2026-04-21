@@ -102,6 +102,23 @@ button {
     cursor:pointer;
 }
 
+/* ===== BACK ARROW ===== */
+.back {
+    position:absolute;
+    top:20px;
+    left:25px;
+    font-size:28px;
+    color:white;
+    cursor:pointer;
+    opacity:0.8;
+    transition:0.3s;
+}
+
+.back:hover {
+    opacity:1;
+    transform:scale(1.2);
+}
+
 /* ===== PARTICLES ===== */
 canvas {
     position:fixed;
@@ -157,6 +174,8 @@ canvas {
 
 <!-- RESULT -->
 <div class="section" id="result">
+    <div class="back" onclick="goBack()">←</div>
+
     <div class="glass">
         <div class="type" id="resultText"></div>
     </div>
@@ -220,6 +239,11 @@ function pathFuture(){
     show(4);
     cinematicText("resultText","I see you in every future of mine.");
     setTimeout(()=>show(5),6000);
+}
+
+/* ===== BACK BUTTON FUNCTION ===== */
+function goBack(){
+    show(3); // goes back to choice screen
 }
 
 /* ===== PARTICLES ===== */
